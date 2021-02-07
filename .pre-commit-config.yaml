@@ -1,25 +1,35 @@
--   repo: https://github.com/pre-commit/mirrors-yapf.git
-    sha: v0.16.0
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v3.4.0
     hooks:
-    -   id: yapf
-        files: \.py$
-
--   repo: https://github.com/pre-commit/pre-commit-hooks
-    sha: a11d9314b22d8f8c7556443875b731ef05965464
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-merge-conflict
+      - id: check-json
+      - id: check-toml
+      - id: check-yaml
+      - id: check-symlinks
+      - id: destroyed-symlinks
+  - repo: https://gitlab.com/pycqa/flake8
+    rev: 3.8.4
     hooks:
-    -   id: check-merge-conflict
-    -   id: check-symlinks
-    -   id: end-of-file-fixer
-    -   id: trailing-whitespace
-    -   id: detect-private-key
-    -   id: check-symlinks
-    -   id: check-added-large-files
-
--   repo: local
+      - id: flake8
+        alias: be
+        exclude: ^frontend/
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.7.1.1
     hooks:
-    -   id: clang-format-with-version-check
-        name: clang-format
-        description: Format files with ClangFormat.
-        entry: bash ./.clang_format.hook -i
-        language: system
-        files: \.(c|cc|cxx|cpp|cu|h|hpp|hxx|proto)$
+      - id: shellcheck
+  - repo: local
+    hooks:
+      - id: fe
+        name: lint-staged
+        entry: ./frontend/scripts/lint-staged.sh
+        language: node
+        files: ^frontend/
+        description: lint frontend code by lint-staged
+  - repo: meta
+    hooks:
+      - id: check-hooks-apply
+      - id: check-useless-excludes

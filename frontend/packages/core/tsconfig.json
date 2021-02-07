@@ -1,0 +1,37 @@
+{
+    "include": [
+        "src",
+        "test",
+        "types"
+    ],
+    "exclude": [
+        "node_modules"
+    ],
+    "extends": "@snowpack/app-scripts-react/tsconfig.base.json",
+    "compilerOptions": {
+        "baseUrl": "./",
+        "isolatedModules": true,
+        "paths": {
+            "*": [
+                "web_modules/.types/*"
+            ],
+            "~/*": [
+                "./src/*"
+            ]
+        },
+        "lib": [
+            "DOM",
+            "DOM.Iterable",
+            "ESNext",
+            "ESNext.Array",
+            "ESNext.AsyncIterable",
+            "ESNext.BigInt",
+            "ESNext.Intl",
+            "ESNext.Promise",
+            "ESNext.String",
+            "ESNext.Symbol",
+            "ScriptHost",
+            "WebWorker"
+        ]
+    }
+}
